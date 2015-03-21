@@ -4,7 +4,7 @@ import string
 import random
 from icalendar import Calendar, Event
 import requests
-import datetime
+from datetime import datetime
 import time
 import json
 from pytz import timezone
@@ -49,15 +49,15 @@ def nextEvent():
 
 def getTimeTo(unix, default="now"):
 
-        offset = datetime.datetime.now(timezone('Australia/Sydney')).strftime('%z')
+        offset = datetime.now(timezone('Australia/Sydney')).strftime('%z')
         offset = offset.strip("00")
         offset = offset.strip("+")
         offset = int(offset) * 60 * 60
 
-        workingdatetime = datetime.datetime.fromtimestamp(int(unix) - offset).strftime('%Y-%m-%d %H:%M:%S')
+        workingdatetime = datetime.fromtimestamp(int(unix) - offset).strftime('%Y-%m-%d %H:%M:%S')
 
-        now = datetime.datetime.utcnow()
-        diff = datetime.datetime.strptime(workingdatetime, "%Y-%m-%d %H:%M:%S") - now
+        now = datetime.utcnow()
+        diff = datetime.strptime(workingdatetime, "%Y-%m-%d %H:%M:%S") - now
 
         periods = (
                 (diff.days / 365, "year", "years"),
@@ -93,13 +93,31 @@ def cleanTime(time):
 @app.hook('before_request')
 def before_request():
         global timebefore
-        timebefore = datetime.datetime.now()
+        timebefore = datetime.now()
 
 @app.hook('after_request')
 def after_request():
-        timeafter = datetime.datetime.now()
+        timeafter = datetime.now()
         difference = timeafter - timebefore
-        print bottle.request.remote_addr + " - " + bottle.response.status_line + " - " + str(round(float(difference.microseconds) / 1000, 2)) + "ms - " + bottle.request.method + " - " + bottle.request.path
+        #print bottle.request.remote_addr + " - " + bottle.response.status_line + " - " + str(round(float(difference.microseconds) / 1000, 2)) + "ms - " + bottle.request.method + " - " + bottle.request.path
+
+        logstring = ""
+        logstring += "[" + datetime.now().strftime("%c") + "] "
+
+        if str(bottle.response.status_code) == "200":
+                logstring += "[\033[92m" + str(bottle.response.status_code) + "\033[0m] "
+        elif str(bottle.response.status_code) == "404" or str(bottle.response.status_code) == "403":
+                logstring += "[\033[91m" + str(bottle.response.status_code) + "\033[0m] "
+        else:
+                logstring += "[" + str(bottle.response.status_code) + "] "
+
+        logstring += "[in " + str(round(float(difference.microseconds) / 1000, 2)) + "ms] "
+        logstring += "[" + bottle.request.method + "] "
+
+        logstring += bottle.request.remote_addr + ": "
+        logstring += bottle.request.path
+
+        print logstring
 
 app = WsgiLog(app, tostream=True)
 bottle.run(app=app, server='cherrypy', host='0.0.0.0', port=8080, reloader=True)
