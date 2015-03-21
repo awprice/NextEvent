@@ -1,0 +1,59 @@
+{
+    "appKeys": {
+        "KEY_EVENTEND": 1,
+        "KEY_EVENTLOCATION": 2,
+        "KEY_EVENTSTART": 0,
+        "KEY_EVENTTIMETO": 3,
+        "KEY_EVENTTITLE": 4
+    },
+    "capabilities": [
+        ""
+    ],
+    "companyName": "alexprice.io",
+    "longName": "NextEvent",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/nextevent-menuicon.png",
+                "menuIcon": true,
+                "name": "NEXTEVENT_MENUICON",
+                "type": "png"
+            },
+            {
+                "file": "images/nextevent-background.png",
+                "name": "NEXTEVENT_BACKGROUND",
+                "type": "png"
+            },
+            {
+                "file": "fonts/consolab.ttf",
+                "name": "FONT_CONSOLAS_BOLD_14",
+                "type": "font"
+            },
+            {
+                "file": "fonts/consolab.ttf",
+                "name": "FONT_CONSOLAS_BOLD_40",
+                "type": "font"
+            },
+            {
+                "file": "fonts/consolab.ttf",
+                "name": "FONT_CONSOLAS_BOLD_18",
+                "type": "font"
+            },
+            {
+                "file": "fonts/consola.ttf",
+                "name": "FONT_CONSOLAS_REGULAR_14",
+                "type": "font"
+            }
+        ]
+    },
+    "sdkVersion": "2",
+    "shortName": "NextEvent",
+    "uuid": "1c073128-3edd-4ec8-a6b2-566da952ef8e",
+    "versionCode": 1,
+    "versionLabel": "1.1",
+    "watchapp": {
+        "watchface": true
+    }
+}
+
