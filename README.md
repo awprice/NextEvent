@@ -41,3 +41,7 @@ Here is what the JSON object that is sent to the watchapp should look like:
 
  - The title for the event is trimmed to 13 characters to fit and look nice on the tiny Pebble watch screen
  - The Google Calendar file is downloaded every time a request is made for the JSON object. Not very good to download it every time, but it works for now...
+
+## Screenshot ##
+
+![screenshot](https://raw.github.com/Outlaw11A/NextEvent/master/screenshot.png)
