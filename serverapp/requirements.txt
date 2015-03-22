@@ -1,0 +1,5 @@
+bottle==0.12.7
+wsgilog==0.3
+icalendar==3.8.5.dev0
+requests==2.2.1
+pytz==2014.10
